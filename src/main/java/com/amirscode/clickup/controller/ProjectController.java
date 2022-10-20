@@ -36,22 +36,22 @@ public class ProjectController {
         return projectService.getProject(id);
     }
 
-    @PostMapping
+    @PostMapping("/member")
     public HttpEntity<?> addMember(@RequestBody ProjectUserDTO projectUserDTO) {
         return projectService.addMember(projectUserDTO);
     }
 
-    @GetMapping("/{id}")
+    @GetMapping("/allArchive/{id}")
     public HttpEntity<?> getArchivedProject(@PathVariable Long id){
         return projectService.getArchivedProject(id);
     }
 
-    @PutMapping("/{id}")
+    @PutMapping("/archive/{id}")
     public HttpEntity<?> ArchiveProject(@PathVariable Long id){
         return projectService.archiveProject(id);
     }
 
-    @PutMapping("/{id}")
+    @PutMapping("/unArchive/{id}")
     public HttpEntity<?> UnArchiveProject(@PathVariable Long id){
         return projectService.unArchiveProject(id);
     }

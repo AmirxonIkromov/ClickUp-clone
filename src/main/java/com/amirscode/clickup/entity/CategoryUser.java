@@ -15,8 +15,6 @@ import javax.persistence.*;
 
 public class CategoryUser extends AbsLongEntity {
 
-    private String name;
-
     @ManyToOne
     private Category category;
 

@@ -48,17 +48,17 @@ public class SpaceController {
         return spaceService.addMember(spaceUserDTO);
     }
 
-    @GetMapping("/{id}")
+    @GetMapping("/allArchive{id}")
     public HttpEntity<?> getArchivedSpace(@PathVariable Long id){
         return spaceService.getArchivedSpace(id);
     }
 
-    @PutMapping("/{id}")
+    @PutMapping("/archive/{id}")
     public HttpEntity<?> ArchiveSpace(@PathVariable Long id){
         return spaceService.archiveSpace(id);
     }
 
-    @PutMapping("/{id}")
+    @PutMapping("unArchive/{id}")
     public HttpEntity<?> UnArchiveSpace(@PathVariable Long id){
         return spaceService.unArchiveSpace(id);
     }
