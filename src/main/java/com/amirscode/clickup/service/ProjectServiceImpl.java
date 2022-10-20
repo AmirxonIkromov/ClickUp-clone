@@ -69,6 +69,7 @@ public class ProjectServiceImpl implements ProjectService {
         var projectUser = new ProjectUser();
         projectUser.setProject(project);
         projectUser.setUser(user);
+        projectUser.setPermission(projectUserDTO.getPermissionName());
         projectUserRepository.save(projectUser);
 
         return ResponseEntity.ok().body("success");
@@ -103,6 +104,6 @@ public class ProjectServiceImpl implements ProjectService {
         spaceRepository.findById(id).orElseThrow(IllegalStateException::new);
         var projectList = projectRepository.findAllBySpaceIdAndArchived(id, false);
 
-        return ResponseEntity.ok().body(projectList);
+        return ResponseEntity.ok(projectList);
     }
 }

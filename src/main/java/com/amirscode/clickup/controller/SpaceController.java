@@ -12,6 +12,8 @@ import org.springframework.http.HttpEntity;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
+import javax.validation.Valid;
+
 @RequiredArgsConstructor
 @RestController
 @RequestMapping("/api/space")
@@ -21,7 +23,7 @@ public class SpaceController {
     final SpaceService spaceService;
 
     @PostMapping
-    public HttpEntity<?> addSpace(@RequestBody SpaceDTO spaceDTO, @CurrentUser User user) {
+    public HttpEntity<?> addSpace(@Valid @RequestBody SpaceDTO spaceDTO, @CurrentUser User user) {
         ApiResponse apiResponse = spaceService.addSpace(spaceDTO, user);
         return ResponseEntity.status(apiResponse.isSuccess() ? 201 : 409).body(apiResponse);
     }

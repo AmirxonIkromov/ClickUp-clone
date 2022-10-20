@@ -8,6 +8,8 @@ import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpEntity;
 import org.springframework.web.bind.annotation.*;
 
+import javax.validation.Valid;
+
 @RequiredArgsConstructor
 @RestController
 @RequestMapping("/api/category")
@@ -18,13 +20,13 @@ public class CategoryController {
 
 
     @PostMapping
-    public HttpEntity<?> addCategory(@RequestBody CategoryDTO categoryDTO) {
+    public HttpEntity<?> addCategory(@Valid @RequestBody CategoryDTO categoryDTO) {
         return categoryService.addCategory(categoryDTO);
     }
 
     @PutMapping("/{id}")
     public HttpEntity<?> editCategory(@PathVariable Long id, @RequestBody CategoryDTO categoryDTO) {
-        return categoryService.editProject(id, categoryDTO);
+        return categoryService.editCategory(id, categoryDTO);
     }
 
     @DeleteMapping("/{id}")
