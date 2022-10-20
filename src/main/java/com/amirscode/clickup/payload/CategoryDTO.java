@@ -5,7 +5,7 @@ import lombok.Data;
 import javax.validation.constraints.NotNull;
 
 @Data
-public class ProjectDTO {
+public class CategoryDTO {
 
     @NotNull
     private String name;
@@ -17,5 +17,5 @@ public class ProjectDTO {
     private boolean archived;
 
     @NotNull
-    private Long spaceId;
+    private Long projectId;
 }

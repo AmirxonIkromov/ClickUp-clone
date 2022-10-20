@@ -3,18 +3,14 @@ package com.amirscode.clickup.payload;
 import com.amirscode.clickup.enums.TaskPermissionName;
 import lombok.Data;
 
-import javax.validation.constraints.NotNull;
 import java.util.UUID;
 
 @Data
-public class ProjectUserDTO {
+public class CategoryUserDTO {
 
-    @NotNull
-    private Long project;
+    private Long categoryId;
 
-    @NotNull
-    private UUID user;
+    private UUID userId;
 
     private TaskPermissionName permissionName;
-
 }
