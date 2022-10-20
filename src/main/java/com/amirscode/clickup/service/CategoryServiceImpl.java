@@ -14,10 +14,8 @@ import org.springframework.stereotype.Service;
 @RequiredArgsConstructor
 public class CategoryServiceImpl implements CategoryService {
 
-    final SpaceRepository spaceRepository;
     final ProjectRepository projectRepository;
     final UserRepository userRepository;
-    final ProjectUserRepository projectUserRepository;
     final CategoryRepository categoryRepository;
     final CategoryUserRepository categoryUserRepository;
 
@@ -68,6 +66,7 @@ public class CategoryServiceImpl implements CategoryService {
         var categoryUser = new CategoryUser();
         categoryUser.setCategory(category);
         categoryUser.setUser(user);
+        categoryUser.setPermissionName(categoryUserDTO.getPermissionName());
         categoryUserRepository.save(categoryUser);
 
         return ResponseEntity.ok().body("success");

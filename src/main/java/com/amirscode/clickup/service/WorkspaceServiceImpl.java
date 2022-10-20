@@ -40,13 +40,7 @@ public class WorkspaceServiceImpl implements WorkspaceService {
                 workspaceDTO.getName(),
                 workspaceDTO.getColor(),
                 user,
-<<<<<<< HEAD
                 workspaceDTO.getAvatarId() == null ? null : attachmentRepository.findById(workspaceDTO.getAvatarId()).orElseThrow(() -> new ResourceNotFoundException("attachment"))
-=======
-                workspaceDTO.getAvatarId() == null ? null : attachmentRepository
-                        .findById(workspaceDTO.getAvatarId())
-                        .orElseThrow(() -> new ResourceNotFoundException("attachment"))
->>>>>>> 5de2541 (space and project CRUD)
         );
         workspaceRepository.save(workspace);
 
@@ -96,11 +90,7 @@ public class WorkspaceServiceImpl implements WorkspaceService {
 
     @Override
     public ApiResponse changeOwnerWorkspace(Long id, UUID ownerId) {
-<<<<<<< HEAD
-=======
 
-
->>>>>>> 5de2541 (space and project CRUD)
         Workspace workspace = workspaceRepository.findById(id).orElseThrow(() -> new IllegalStateException("workspace id not found"));
 
         WorkspaceRole ownerRole = addRole(workspace);
@@ -181,19 +171,10 @@ public class WorkspaceServiceImpl implements WorkspaceService {
 
 
     public WorkspaceRole addRole(Workspace workspace){
-<<<<<<< HEAD
-        WorkspaceRole ownerRole = workspaceRoleRepository.save(new WorkspaceRole(
-=======
         return workspaceRoleRepository.save(new WorkspaceRole(
->>>>>>> 5de2541 (space and project CRUD)
                 workspace,
                 WorkspaceRoleName.ROLE_OWNER.name(),
-                null
-        ));
-<<<<<<< HEAD
-        return ownerRole;
-=======
->>>>>>> 5de2541 (space and project CRUD)
+                null));
     }
 
     public WorkspaceRole adminRole(Workspace workspace){

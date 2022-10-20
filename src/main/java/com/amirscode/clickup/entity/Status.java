@@ -6,12 +6,11 @@ import com.fasterxml.jackson.annotation.JsonInclude;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
-import lombok.NonNull;
 
 import javax.persistence.Entity;
 import javax.persistence.EnumType;
 import javax.persistence.Enumerated;
-import javax.persistence.OneToOne;
+import javax.persistence.ManyToOne;
 
 @Data
 @AllArgsConstructor
@@ -28,13 +27,13 @@ public class Status extends AbsLongEntity {
     @Enumerated(EnumType.STRING)
     private StatusType statusType;
 
-    @OneToOne
+    @ManyToOne
     private Space space;
 
-    @OneToOne
+    @ManyToOne
     private Project project;
 
-    @OneToOne
+    @ManyToOne
     private Category category;
 
 }

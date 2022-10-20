@@ -7,6 +7,8 @@ import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpEntity;
 import org.springframework.web.bind.annotation.*;
 
+import javax.validation.Valid;
+
 @RequiredArgsConstructor
 @RestController
 @RequestMapping("/api/project")
@@ -17,7 +19,7 @@ public class ProjectController {
 
 
     @PostMapping
-    public HttpEntity<?> addProject(@RequestBody ProjectDTO projectDTO) {
+    public HttpEntity<?> addProject(@Valid @RequestBody ProjectDTO projectDTO) {
         return projectService.addProject(projectDTO);
     }
 
