@@ -24,4 +24,8 @@ public interface TaskService {
     HttpEntity<?> addTaskTag(Long tagId, UUID taskId);
 
     HttpEntity<?> assignUser(UUID userId, UUID taskId);
+
+    HttpEntity<?> getTasksByStatus(Long id);
+
+    HttpEntity<?> getTasksByCategory(Long id);
 }

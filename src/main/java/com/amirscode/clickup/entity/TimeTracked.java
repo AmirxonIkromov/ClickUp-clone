@@ -6,7 +6,7 @@ import lombok.Data;
 import lombok.NoArgsConstructor;
 
 import javax.persistence.Entity;
-import javax.persistence.OneToOne;
+import javax.persistence.ManyToOne;
 import java.sql.Timestamp;
 
 @Data
@@ -16,7 +16,7 @@ import java.sql.Timestamp;
 
 public class TimeTracked extends AbsLongEntity {
 
-    @OneToOne
+    @ManyToOne
     private Task task;
 
     private Timestamp startedAt;

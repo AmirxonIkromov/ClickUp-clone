@@ -17,6 +17,16 @@ public class TaskController {
 
     final TaskService taskService;
 
+    @GetMapping("/tasksByStatus/{id}")
+    public HttpEntity<?> getTasksByStatus(@PathVariable Long id){
+        return taskService.getTasksByStatus(id);
+    }
+
+    @GetMapping("/tasksByCategory/{id}")
+    public HttpEntity<?> getTasksByCategory(@PathVariable Long id){
+        return taskService.getTasksByCategory(id);
+    }
+
     @PostMapping("/taskTag")
     public HttpEntity<?> addTaskTag(@RequestParam  Long tagId, UUID taskId){
         return taskService.addTaskTag(tagId, taskId);
@@ -52,8 +62,4 @@ public class TaskController {
         return taskService.deleteTask(id);
     }
 
-    @GetMapping
-    public HttpEntity<?> getTasks(){
-        return taskService.getTasks();
-    }
 }
