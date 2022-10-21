@@ -33,6 +33,18 @@ public class TaskServiceImpl implements TaskService{
     final ModelMapper mapper;
 
     @Override
+    public HttpEntity<?> getTasksByStatus(Long id) {
+        var taskList = taskRepository.findAllByStatusId(id);
+        return ResponseEntity.ok().body(taskList);
+    }
+
+    @Override
+    public HttpEntity<?> getTasksByCategory(Long id) {
+        var taskList = taskRepository.findAllByCategoryId(id);
+        return ResponseEntity.ok().body(taskList);
+    }
+
+    @Override
     public HttpEntity<?> addTaskDependency(TaskDependencyDTO taskDependencyDTO) {
         mapper.getConfiguration().setMatchingStrategy(MatchingStrategies.LOOSE);
         TaskDependency taskDependency = mapper.map(taskDependencyDTO, TaskDependency.class);
