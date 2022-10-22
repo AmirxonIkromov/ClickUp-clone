@@ -30,6 +30,7 @@ public class TaskServiceImpl implements TaskService{
     final TaskTagRepository taskTagRepository;
     final UserRepository userRepository;
     final TaskUserRepository taskUserRepository;
+    final TaskHistoryRepository taskHistoryRepository;
     final ModelMapper mapper;
 
     @Override
@@ -112,6 +113,7 @@ public class TaskServiceImpl implements TaskService{
         mapper.getConfiguration().setMatchingStrategy(MatchingStrategies.LOOSE);
         task = mapper.map(taskDTO, Task.class);
         taskRepository.save(task);
+        TaskHistory taskHistory = new TaskHistory();
 
         return ResponseEntity.ok("Task edited");
     }

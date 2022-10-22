@@ -1,6 +1,6 @@
 package com.amirscode.clickup.entity;
 
-import com.amirscode.clickup.template.AbsLongEntity;
+import com.amirscode.clickup.template.AbsUUIDEntity;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
@@ -14,7 +14,7 @@ import java.util.Date;
 @NoArgsConstructor
 @Entity
 
-public class TaskHistory extends AbsLongEntity {
+public class TaskHistory extends AbsUUIDEntity {
 
     private String field;
 

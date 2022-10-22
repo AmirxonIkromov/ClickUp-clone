@@ -6,6 +6,7 @@ import com.amirscode.clickup.payload.ApiResponse;
 import com.amirscode.clickup.payload.MemberDTO;
 import com.amirscode.clickup.payload.WorkspaceDTO;
 
+import java.util.List;
 import java.util.UUID;
 
 
@@ -23,6 +24,5 @@ public interface WorkspaceService {
 
     ApiResponse joinToWorkspace(Long id, User user);
 
-    ApiResponse getAllWorkspace();
-
+    List<WorkspaceDTO> getMyWorkspaces(User user);
 }

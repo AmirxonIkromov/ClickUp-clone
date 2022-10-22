@@ -1,6 +1,5 @@
 package com.amirscode.clickup.service;
 
-import com.amirscode.clickup.payload.TagDTO;
 import com.amirscode.clickup.payload.TaskAttachmentDTO;
 import com.amirscode.clickup.payload.TaskDTO;
 import com.amirscode.clickup.payload.TaskDependencyDTO;
@@ -28,4 +27,4 @@ public interface TaskService {
     HttpEntity<?> getTasksByStatus(Long id);
 
     HttpEntity<?> getTasksByCategory(Long id);
-}
+}   

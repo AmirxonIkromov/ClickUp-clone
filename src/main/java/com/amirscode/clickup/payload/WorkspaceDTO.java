@@ -13,6 +13,10 @@ public class WorkspaceDTO {
     @NotNull
     private String color;
 
+    private Long workspaceId;
+
     private UUID avatarId;
+
+    private String initial;
 
 }

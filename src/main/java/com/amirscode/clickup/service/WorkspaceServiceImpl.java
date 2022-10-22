@@ -18,18 +18,19 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 import java.util.UUID;
+import java.util.stream.Collectors;
 
 
 @Service
 @RequiredArgsConstructor
 public class WorkspaceServiceImpl implements WorkspaceService {
-   final WorkspaceRepository workspaceRepository;
-   final SecurityConfig securityConfig;
-   final AttachmentRepository attachmentRepository;
-   final WorkspaceUserRepository workspaceUserRepository;
-   final WorkspaceRoleRepository workspaceRoleRepository;
-   final WorkspacePermissionRepository workspacePermissionRepository;
-   final UserRepository userRepository;
+    final WorkspaceRepository workspaceRepository;
+    final SecurityConfig securityConfig;
+    final AttachmentRepository attachmentRepository;
+    final WorkspaceUserRepository workspaceUserRepository;
+    final WorkspaceRoleRepository workspaceRoleRepository;
+    final WorkspacePermissionRepository workspacePermissionRepository;
+    final UserRepository userRepository;
 
     @Override
     public ApiResponse addWorkspace(WorkspaceDTO workspaceDTO, User user) {
@@ -55,7 +56,7 @@ public class WorkspaceServiceImpl implements WorkspaceService {
         WorkspaceRole guestRole = guestRole(workspace);
 
 
-        addPermission(ownerRole,adminRole,memberRole,guestRole);
+        addPermission(ownerRole, adminRole, memberRole, guestRole);
 
         // OPEN WORKSPACE USER
 
@@ -72,9 +73,8 @@ public class WorkspaceServiceImpl implements WorkspaceService {
     }
 
 
-
     @Override
-    public ApiResponse editWorkspace(Long id,WorkspaceDTO workspaceDTO) {
+    public ApiResponse editWorkspace(Long id, WorkspaceDTO workspaceDTO) {
 
         Workspace workspace = workspaceRepository.findById(id).orElseThrow(() -> new IllegalStateException("workspace id not found"));
 
@@ -101,7 +101,7 @@ public class WorkspaceServiceImpl implements WorkspaceService {
 
         WorkspaceRole guestRole = guestRole(workspace);
 
-        addPermission(ownerRole,adminRole,memberRole,guestRole);
+        addPermission(ownerRole, adminRole, memberRole, guestRole);
 
         User user = userRepository.findById(ownerId).orElseThrow(() -> new RuntimeException("User does not exist"));
 
@@ -162,31 +162,44 @@ public class WorkspaceServiceImpl implements WorkspaceService {
         return new ApiResponse("Error", false);
     }
 
-    @Override
-    public ApiResponse getAllWorkspace() {
 
-        List<Workspace> all = workspaceRepository.findAll();
-        return new ApiResponse("success", true, all);
+    @Override
+    public List<WorkspaceDTO> getMyWorkspaces(User user) {
+        var workspaceUserList = workspaceUserRepository.findAllByUserId(user.getId());
+       return workspaceUserList.stream().map(workspaceUser -> mapper(workspaceUser.getWorkspace())).collect(Collectors.toList());
     }
 
-
-    public WorkspaceRole addRole(Workspace workspace){
+    public WorkspaceRole addRole(Workspace workspace) {
         return workspaceRoleRepository.save(new WorkspaceRole(
                 workspace,
                 WorkspaceRoleName.ROLE_OWNER.name(),
                 null));
     }
 
-    public WorkspaceRole adminRole(Workspace workspace){
+    public WorkspaceRole adminRole(Workspace workspace) {
         return workspaceRoleRepository.save(new WorkspaceRole(workspace, WorkspaceRoleName.ROLE_ADMIN.name(), null));
     }
-    public WorkspaceRole memberRole(Workspace workspace){
+
+    public WorkspaceRole memberRole(Workspace workspace) {
         return workspaceRoleRepository.save(new WorkspaceRole(workspace, WorkspaceRoleName.ROLE_MEMBER.name(), null));
     }
-    public WorkspaceRole guestRole(Workspace workspace){
+
+    public WorkspaceRole guestRole(Workspace workspace) {
         return workspaceRoleRepository.save(new WorkspaceRole(workspace, WorkspaceRoleName.ROLE_GUEST.name(), null));
     }
 
+
+    private WorkspaceDTO mapper(Workspace workspace) {
+        WorkspaceDTO workspaceDTO = new WorkspaceDTO();
+
+        workspaceDTO.setWorkspaceId(workspace.getId());
+        workspaceDTO.setName(workspace.getName());
+        workspaceDTO.setColor(workspace.getColor());
+        workspaceDTO.setInitial(workspace.getInitialLetter());
+        workspaceDTO.setAvatarId(workspace.getAvatar() == null ? null : workspace.getAvatar().getId());
+
+        return workspaceDTO;
+    }
 
     private void addPermission(WorkspaceRole ownerRole, WorkspaceRole adminRole, WorkspaceRole memberRole, WorkspaceRole guestRole) {
         WorkspacePermissionName[] workspacePermissionNames = WorkspacePermissionName.values();
