@@ -12,6 +12,7 @@ public interface CommentService {
 
     HttpEntity<?> readComment(UUID id);
 
-    HttpEntity<?> editComment(Long id, User currentUser);
+    HttpEntity<?> editComment(Long id, String text, User currentUser);
 
+    HttpEntity<?> deleteComment(Long id, User currentUser);
 }

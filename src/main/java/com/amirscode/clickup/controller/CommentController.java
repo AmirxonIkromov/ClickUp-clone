@@ -30,7 +30,12 @@ public class CommentController {
     }
 
     @PutMapping("/{id}")
-    public HttpEntity<?> editComment(@PathVariable Long id, @CurrentUser User currentUser){
-        return commentService.editComment(id, currentUser);
+    public HttpEntity<?> editComment(@PathVariable Long id, @RequestParam String text, @CurrentUser User currentUser){
+        return commentService.editComment(id, text, currentUser);
+    }
+
+    @DeleteMapping("/{id}")
+    public HttpEntity<?> deleteComment(@PathVariable Long id, @CurrentUser User currentUser){
+        return commentService.deleteComment(id, currentUser);
     }
 }

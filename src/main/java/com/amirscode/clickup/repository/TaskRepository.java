@@ -1,5 +1,6 @@
 package com.amirscode.clickup.repository;
 
+import com.amirscode.clickup.entity.Comment;
 import com.amirscode.clickup.entity.Task;
 import org.springframework.data.jpa.repository.JpaRepository;
 

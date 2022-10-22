@@ -13,6 +13,7 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import javax.validation.Valid;
+import java.util.List;
 import java.util.UUID;
 
 @RequiredArgsConstructor
@@ -81,13 +82,11 @@ public class WorkspaceController {
     }
 
 
-    @GetMapping("/workspace")
-    public HttpEntity<?> getAllWorkspace(){
-        ApiResponse apiResponse = workspaceService.getAllWorkspace();
-        return ResponseEntity.status(apiResponse.isSuccess() ? 200 : 409).body(apiResponse);
+    @GetMapping("/myWorkspaces")
+    public HttpEntity<?> getMyWorkspaces(@CurrentUser User user){
+        List<WorkspaceDTO> workspace = workspaceService.getMyWorkspaces(user);
+        return ResponseEntity.ok(workspace);
     }
 
-//    @PostMapping
-//    public HttpEntity<?> addRole()
 
 }
