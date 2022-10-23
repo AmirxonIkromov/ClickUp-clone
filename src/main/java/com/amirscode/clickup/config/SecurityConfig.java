@@ -4,9 +4,13 @@ import com.amirscode.clickup.entity.User;
 import com.amirscode.clickup.security.JwtFilter;
 import com.amirscode.clickup.service.AuthService;
 import lombok.RequiredArgsConstructor;
+import org.hibernate.annotations.Any;
+import org.hibernate.annotations.LazyGroup;
+import org.springframework.beans.factory.BeanFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
+import org.springframework.context.annotation.Lazy;
 import org.springframework.mail.javamail.JavaMailSender;
 import org.springframework.mail.javamail.JavaMailSenderImpl;
 import org.springframework.security.authentication.AuthenticationManager;
@@ -23,7 +27,7 @@ import org.springframework.security.web.authentication.UsernamePasswordAuthentic
 
 import java.util.Properties;
 
-@RequiredArgsConstructor
+@RequiredArgsConstructor(onConstructor_ ={@Lazy})
 @Configuration
 @EnableWebSecurity
 @EnableGlobalMethodSecurity(prePostEnabled = true)

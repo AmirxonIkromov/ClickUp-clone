@@ -10,6 +10,7 @@ import com.amirscode.clickup.payload.MemberDTO;
 import com.amirscode.clickup.payload.WorkspaceDTO;
 import com.amirscode.clickup.repository.*;
 import lombok.RequiredArgsConstructor;
+import org.springframework.context.annotation.Lazy;
 import org.springframework.data.rest.webmvc.ResourceNotFoundException;
 import org.springframework.stereotype.Service;
 

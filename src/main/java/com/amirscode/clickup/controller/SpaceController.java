@@ -45,7 +45,7 @@ public class SpaceController {
         return spaceService.getSpace(id);
     }
 
-    @PostMapping
+    @PostMapping("/member")
     public HttpEntity<?> addMember(@RequestBody SpaceUserDTO spaceUserDTO) {
         return spaceService.addMember(spaceUserDTO);
     }
